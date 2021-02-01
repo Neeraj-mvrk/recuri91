@@ -33,8 +33,8 @@ class Environment {
 
     getS3Cred(): object {
         return {
-            ID:'AKIAITCTTWLQGKQF3Z5A',
-            SECRET:'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',
+            ID:'',
+            SECRET:'',
             BUCKET:'recuri91'  
         }
     }
