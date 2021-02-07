@@ -18,7 +18,6 @@ class UserController {
             }
             else {
                 service_1.successResponse('create user successfull', user_data, res);
-                this.user_service.createUserList(user_data);
             }
         });
     }
@@ -29,9 +28,9 @@ class UserController {
                 service_1.mongoError(err, res);
             }
             else {
-                console.log(user_data);
+                //console.log(user_data);
                 if (user_data) {
-                    this.check(req, res, user_data);
+                    service_1.successResponse('update user successfull', user_data, res);
                 }
                 else {
                     service_1.failureResponse('User not found', null, res);
@@ -39,16 +38,33 @@ class UserController {
             }
         });
     }
-    check(req, res, data) {
-        if (data.password != req.body.password) {
-            console.log('222222222222222');
-            service_1.failureResponse('Password Mismatch', null, res);
-        }
-        else if (data.isActive === false) {
-            service_1.failureResponse('You are not a active user', null, res);
+    update_user(req, res) {
+        let user_params = req.body;
+        this.user_service.updateUser(user_params, (err) => {
+            if (err) {
+                service_1.mongoError(err, res);
+            }
+            else {
+                service_1.successResponse('update user successfull', null, res);
+            }
+        });
+    }
+    delete_user(req, res) {
+        if (req.params.id) {
+            this.user_service.deleteUser(req.params.id, (err, delete_details) => {
+                if (err) {
+                    service_1.mongoError(err, res);
+                }
+                else if (delete_details.deletedCount !== 0) {
+                    service_1.successResponse('delete user successfull', null, res);
+                }
+                else {
+                    service_1.failureResponse('invalid user', null, res);
+                }
+            });
         }
         else {
-            service_1.successResponse('User sucessfully login', data, res);
+            service_1.insufficientParameters(res);
         }
     }
 }

@@ -32,13 +32,6 @@ class Environment {
             return 'mongodb+srv://neeraj:w8Gh5dQRdqQzbgO2@cluster0.3yttf.mongodb.net/test?retryWrites=true&w=majority';
         }
     }
-    getS3Cred() {
-        return {
-            ID: 'AKIAITCTTWLQGKQF3Z5A',
-            SECRET: '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',
-            BUCKET: 'recuri91'
-        };
-    }
 }
 exports.default = new Environment(Environments.local_environment);
 //# sourceMappingURL=environment.js.map

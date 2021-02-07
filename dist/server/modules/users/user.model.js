@@ -21,15 +21,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = exports.usersSchema = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-const model_1 = require("../common/model");
 exports.usersSchema = new mongoose_1.Schema({
-    username: String,
-    password: String,
+    email: String,
     firstName: String,
     lastName: String,
     mobile: Number,
-    isActive: Boolean,
-    modification_notes: [model_1.ModificationNote]
-});
+}, { timestamps: true });
 exports.User = mongoose_1.default.model('User', exports.usersSchema);
 //# sourceMappingURL=user.model.js.map

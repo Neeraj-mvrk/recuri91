@@ -3,22 +3,23 @@ import { insufficientParameters, failureResponse } from '../modules/common/servi
 
 export const verifyCreateUser = async (req: Request, res: Response ,next:NextFunction) => {
     try {
-        console.log(req.body,'::::::::::::::::');
-        if(req.body.username && req.body.firstName&& req.body.lastName &&
-            req.body.mobile && req.body.password &&req.body.isActive){
+      if(req.method=='PUT'&& !req.body.id){
+        insufficientParameters(res);
+      }
+        if(req.body.email && req.body.firstName&& req.body.lastName &&
+            req.body.mobile){
               next();
             }else{
-          insufficientParameters(res);;
+          insufficientParameters(res);
         }   
     } catch (error) {
         next(error)
     }      
     }
 
-export const verifyLoginUser = async (req: Request, res: Response ,next:NextFunction) => {
+export const verifyGetUser = async (req: Request, res: Response ,next:NextFunction) => {
         try {
-            console.log(req.query,'::::::::::::::::');
-            if(req.body.username && req.body.password){
+            if(req.params.id){
                   next();
                 }else{
               insufficientParameters(res);;

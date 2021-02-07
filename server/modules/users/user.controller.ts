@@ -14,7 +14,6 @@ export class UserController {
                     mongoError(err, res);
                 } else {
                     successResponse('create user successfull', user_data, res);
-                    this.user_service.createUserList(user_data);
                 }
             });
     }
@@ -25,9 +24,9 @@ export class UserController {
                 if (err) {
                     mongoError(err, res);
                 } else {
-                    console.log(user_data);
+                    //console.log(user_data);
                     if(user_data){
-                            this.check(req,res,user_data)
+                        successResponse('update user successfull', user_data, res);
                     }else{
                         failureResponse('User not found',null,res)
                     }      
@@ -35,15 +34,30 @@ export class UserController {
             });
     }
 
-    check(req:Request,res:Response,data:User){
-        if(data.password!=req.body.password){
-            console.log('222222222222222')
-            failureResponse('Password Mismatch',null,res);
-        }else if(data.isActive === false){
-            failureResponse('You are not a active user',null,res)
-        }else{
-            successResponse('User sucessfully login',data,res)
-        }
+    public update_user(req: Request, res: Response) {
+        let user_params:User = req.body;
+                    this.user_service.updateUser(user_params, (err: any) => {
+                        if (err) {
+                            mongoError(err, res);
+                        } else {
+                            successResponse('update user successfull', null, res);
+                        }
+                    });
     }
 
+    public delete_user(req: Request, res: Response) {
+        if (req.params.id) {
+            this.user_service.deleteUser(req.params.id, (err: any, delete_details:any) => {
+                if (err) {
+                    mongoError(err, res);
+                } else if (delete_details.deletedCount !== 0) {
+                    successResponse('delete user successfull', null, res);
+                } else {
+                    failureResponse('invalid user', null, res);
+                }
+            });
+        } else {
+            insufficientParameters(res);
+        }
+    }
 }

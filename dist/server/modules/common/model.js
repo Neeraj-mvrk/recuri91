@@ -1,11 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.res_status_code = exports.ModificationNote = void 0;
-exports.ModificationNote = {
-    modified_on: Date,
-    modified_by: String,
-    modification_note: String
-};
+exports.res_status_code = void 0;
 var res_status_code;
 (function (res_status_code) {
     res_status_code[res_status_code["success"] = 200] = "success";
