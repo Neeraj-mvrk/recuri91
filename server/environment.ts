@@ -30,8 +30,6 @@ class Environment {
             return 'mongodb+srv://neeraj:w8Gh5dQRdqQzbgO2@cluster0.3yttf.mongodb.net/test?retryWrites=true&w=majority';
         }
     }
-<<<<<<< HEAD
-=======
 
     getS3Cred(): object {
         return {
@@ -40,7 +38,6 @@ class Environment {
             BUCKET:'recuri91'  
         }
     }
->>>>>>> ef89e940768a5a535afa4580b3c978e5e38d8f94
 }
 
 export default new Environment(Environments.local_environment);
